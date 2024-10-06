@@ -19,7 +19,15 @@ export const postProduct = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
-
+export const getOneProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const singleProduct = await Product.findById(id);
+    res.status(200).json({ success: true, data: singleProduct });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
