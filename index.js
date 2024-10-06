@@ -16,6 +16,6 @@ app.use("/user", userRouter);
 app.use("/api", productRouter);
 
 app.patch("/product/:id");
-app.listen(3000, connectionDB(process.env.MONGO_DB_URL), () => {
-  console.log("Server is running on port 3000");
+app.listen(process.env.PORT, connectionDB(process.env.MONGO_DB_URL), () => {
+  console.log("Server is on");
 });

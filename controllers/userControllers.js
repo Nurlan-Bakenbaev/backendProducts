@@ -52,7 +52,7 @@ export const signIn = async (req, res) => {
         .status(401)
         .json({ success: false, message: "Invalid credentials" });
     }
-
+console.log( process.env.JWT_SECRET)
     // Create a token
     const token = jwt.sign(
       {
@@ -60,7 +60,7 @@ export const signIn = async (req, res) => {
         email: existingUser.email,
         verified: existingUser.verified,
       },
-      "thisApp",
+     "Application-TEST-TOKEN",
       { expiresIn: "8h" }
     );
 
