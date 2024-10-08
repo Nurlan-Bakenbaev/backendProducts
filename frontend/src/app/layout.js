@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ChakraUIProviders } from "./providers/ChakraProvider";
 import Navbar from "./components/Navbar";
+import { Box } from "@chakra-ui/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,7 +26,10 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ChakraUIProviders>
           <Navbar />
-          {children}
+          <Box mx="auto" maxW={"80%"}>
+
+            {children}
+          </Box>
         </ChakraUIProviders>
       </body>
     </html>

@@ -1,5 +1,12 @@
 "use client";
-import { Button, Container, Flex, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Flex,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
 import { MdLightMode } from "react-icons/md";
 import { MdModeNight } from "react-icons/md";
@@ -8,27 +15,27 @@ import React from "react";
 import User from "./User";
 
 const Navbar = () => {
-  const [dark, setDark] = React.useState(false);
-  const toggleTheme = () => {
-    setDark(!dark);
-    alert("dark theme is enabled");
-  };
-
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Container px={4}>
+    <Container
+      maxW={"100%"}
+      px={4}
+      bg={useColorModeValue("gray.100", "gray.900")}>
       <Flex
-        h={16}
+        mx="auto"
+        maxW={"80%"}
+        h={"80px"}
         alignItems={"center"}
         justifyContent={"space-between"}
         flexDir={{ base: "column", sm: "row" }}>
         <Text
           bgGradient="linear(to-r, #7921CA, #FF0080)"
           bgClip="text"
-          fontSize={{ base: "22px", sm: "32" }}
+          fontSize={{ base: "28px", md: "36px" }}
           fontWeight="extrabold">
           ANZEIGEN
         </Text>
-        <Flex justifyContent={"space-between"} gap={2}>
+        <Flex alignItems={"center"} justifyContent={"space-between"} gap={2}>
           <Link href={"/create"} className="nav-Link">
             <IoMdAdd />
           </Link>
@@ -36,11 +43,15 @@ const Navbar = () => {
             _hover={{ backgroundColor: "#FF0080" }}
             backgroundColor={"#7921CA"}
             color={"white"}
-            onClick={toggleTheme}>
-            {dark ? <MdLightMode /> : <MdModeNight />}
+            onClick={toggleColorMode}>
+            {colorMode === "light" ? (
+              <MdLightMode className="lightModeIcon" />
+            ) : (
+              <MdModeNight />
+            )}
           </Button>
+          <User />
         </Flex>
-        <User />
       </Flex>
     </Container>
   );

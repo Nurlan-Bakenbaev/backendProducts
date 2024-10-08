@@ -6,6 +6,8 @@
   color: white;
   border-radius: 8px;
   background-color: #ff0080;
+  height: 40px;
+  outline: none;
 }
 .nav-Link:hover {
   background-color: #7921ca;
