@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 ///SIGH-UP///
 export const signUp = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   try {
     const { error, value } = signUpValidation.validate({ email, password });
     if (error) {
@@ -20,7 +20,7 @@ export const signUp = async (req, res) => {
         .json({ success: false, message: "User already exists!" });
     }
     const hashedPassword = await doHash(password, 12);
-    const newUser = new User({ email, password: hashedPassword });
+    const newUser = new User({ email, password: hashedPassword, name });
     const result = await newUser.save();
     result.password = undefined;
     res.status(201).json({
@@ -60,7 +60,7 @@ export const signIn = async (req, res) => {
         email: existingUser.email,
         verified: existingUser.verified,
       },
-     "Application-TEST-TOKEN",
+      "Application-TEST-TOKEN",
       { expiresIn: "8h" }
     );
 

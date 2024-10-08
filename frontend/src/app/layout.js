@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import ReduxProvider from "./components/ReduxWrapper";
 import { ChakraUIProviders } from "./providers/ChakraProvider";
 import Navbar from "./components/Navbar";
 import { Box } from "@chakra-ui/react";
@@ -24,13 +25,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ChakraUIProviders>
-          <Navbar />
-          <Box mx="auto" maxW={"80%"}>
-
-            {children}
-          </Box>
-        </ChakraUIProviders>
+        <ReduxProvider>
+          <ChakraUIProviders>
+            <Navbar />
+            <Box mx="auto" my={"20px"} maxW={"80%"}>
+              {children}
+            </Box>
+          </ChakraUIProviders>
+        </ReduxProvider>
       </body>
     </html>
   );

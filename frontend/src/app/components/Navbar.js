@@ -31,6 +31,7 @@ const Navbar = () => {
         justifyContent={"space-between"}
         flexDir={{ base: "column", sm: "row" }}>
         <Text
+         
           bgGradient="linear(to-r, #7921CA, #FF0080)"
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
