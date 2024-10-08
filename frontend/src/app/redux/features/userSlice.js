@@ -35,7 +35,7 @@ const userSlice = createSlice({
       })
       .addCase(postUser.rejected, (state, action) => {
         state.loading = "failed";
-        state.error = action.payload;
+        state.error = action.payload || "Failed to sign up";
       });
   },
 });

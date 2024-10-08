@@ -3,8 +3,10 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Heading,
   Input,
+  Text,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
@@ -19,12 +21,9 @@ const Login = () => {
   });
   const { user, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  console.log(error);
   const handleChange = (e) => {
-    if (userData.email && userData.password) {
-      setUserData({ ...userData, [e.target.name]: e.target.value });
-    } else {
-      setError(true);
-    }
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
   const handleLogin = (e) => {
     e.preventDefault();
@@ -34,7 +33,7 @@ const Login = () => {
   return (
     <Container maxW={"container.sm"}>
       <Heading as={"h2"} mb={"20px"} size={"2xl"} textAlign={"center"}>
-        Login
+        Sign Up
       </Heading>
       <Box
         w={"full"}
@@ -43,13 +42,11 @@ const Login = () => {
         rounded={"lg"}
         shadow={"md"}>
         <VStack padding={"10px"} spacing={4}>
-          <></>
           <Input
             placeholder="User name"
             name="name"
             value={userData.name}
             onChange={handleChange}
-            required
           />
           <Input
             type="email"
@@ -57,7 +54,6 @@ const Login = () => {
             name="email"
             value={userData.email}
             onChange={handleChange}
-            required
           />
           <Input
             type="password"
@@ -65,11 +61,20 @@ const Login = () => {
             name="password"
             value={userData.password}
             onChange={handleChange}
-            required
           />
-          <Button onClick={handleLogin} colorScheme="purple">
-            {loading ? "Loading..." : "Login"}
-          </Button>
+          {error && (
+            <Text color="red.500" fontSize="sm">
+              {error.message}
+            </Text>
+          )}
+          <Flex>
+            <Button
+              isLoading={error ? false : loading}
+              onClick={handleLogin}
+              colorScheme="purple">
+              Sign up
+            </Button>
+          </Flex>
         </VStack>
       </Box>
     </Container>
