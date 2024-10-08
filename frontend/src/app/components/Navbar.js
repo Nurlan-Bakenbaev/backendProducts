@@ -31,7 +31,6 @@ const Navbar = () => {
         justifyContent={"space-between"}
         flexDir={{ base: "column", sm: "row" }}>
         <Text
-         
           bgGradient="linear(to-r, #7921CA, #FF0080)"
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
@@ -56,8 +55,8 @@ const Navbar = () => {
           <Flex>
             {user ? (
               <Box>
-                <Link href={"/login"} className="nav-Link">
-                  Login
+                <Link href={"/signup"} className="nav-Link">
+                  Sign up
                 </Link>
               </Box>
             ) : (
