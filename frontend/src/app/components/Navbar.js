@@ -1,5 +1,6 @@
 "use client";
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -16,6 +17,7 @@ import User from "./User";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const user = true;
   return (
     <Container
       maxW={"100%"}
@@ -33,9 +35,9 @@ const Navbar = () => {
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
           fontWeight="extrabold">
-          ANZEIGEN
+          <Link href={"/"}> ANZEIGEN</Link>
         </Text>
-        <Flex alignItems={"center"} justifyContent={"space-between"} gap={2}>
+        <Flex alignItems={"center"} justifyContent={"space-between"} gap={3}>
           <Link href={"/create"} className="nav-Link">
             <IoMdAdd />
           </Link>
@@ -45,12 +47,22 @@ const Navbar = () => {
             color={"white"}
             onClick={toggleColorMode}>
             {colorMode === "light" ? (
-              <MdLightMode className="lightModeIcon" />
+              <MdModeNight className="lightModeIcon" />
             ) : (
-              <MdModeNight />
+              <MdLightMode />
             )}
           </Button>
-          <User />
+          <Flex>
+            {user ? (
+              <Box>
+                <Link href={"/login"} className="nav-Link">
+                  Login
+                </Link>
+              </Box>
+            ) : (
+              <User />
+            )}
+          </Flex>
         </Flex>
       </Flex>
     </Container>
