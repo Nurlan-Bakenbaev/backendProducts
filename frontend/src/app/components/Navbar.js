@@ -45,7 +45,7 @@ const Navbar = () => {
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
           fontWeight="extrabold">
-          <Link href={"/"}>My Blog Post</Link>
+          <Link href={"/"}>Anzeigen</Link>
         </Text>
         <Flex alignItems={"center"} justifyContent={"space-between"} gap={3}>
           <Link href={"/create"} className="nav-Link">
