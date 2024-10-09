@@ -1,17 +1,30 @@
-import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Wrap, WrapItem } from "@chakra-ui/react";
 import React from "react";
+import { IoIosLogOut } from "react-icons/io";
+import { MdAccountCircle } from "react-icons/md";
 
-const User = () => {
+const User = ({ user }) => {
+  const { name, email, img } = user;
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
   return (
-    <Wrap>
-      <WrapItem>
-        <Avatar
-          size="md"
-          name="Segun Adebayo"
-          src="https://bit.ly/sage-adebayo"
-        />
-      </WrapItem>
-    </Wrap>
+    <Flex alignItems={"center"} gap={3}>
+      <Wrap>
+        <WrapItem>
+          <Avatar
+            title={name}
+            size="md"
+            name={name}
+            src={img || <MdAccountCircle />}
+          />
+        </WrapItem>
+      </Wrap>
+      <Button onClick={handleLogout}>
+        <IoIosLogOut />
+      </Button>
+    </Flex>
   );
 };
 

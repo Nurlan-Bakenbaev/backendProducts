@@ -20,10 +20,11 @@ export const loginUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/signup",
-        userData
+        "http://localhost:8000/user/signin",
+        userData,
+        { withCredentials: true }
       );
-      return res;
+      return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -42,22 +43,26 @@ const userSlice = createSlice({
     builder
       .addCase(postUser.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(postUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.error = null;
       })
       .addCase(postUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to sign up";
       });
+
     builder
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = action.payload;
+        state.loading = false;
+        state.user = action.payload;
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -66,4 +71,5 @@ const userSlice = createSlice({
       });
   },
 });
+
 export default userSlice.reducer;

@@ -12,12 +12,23 @@ import { IoMdAdd } from "react-icons/io";
 import { MdLightMode } from "react-icons/md";
 import { MdModeNight } from "react-icons/md";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import User from "./User";
+import cookie from "cookie";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const user = true;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const cookies = cookie.parse(document.cookie);
+    const userEmail = cookies.userEmail || null;
+    const userName = cookies.userName || null;
+
+    if (userEmail) {
+      setUser({ email: userEmail, name: userName });
+    }
+  }, []);
   return (
     <Container
       maxW={"100%"}
@@ -54,13 +65,13 @@ const Navbar = () => {
           </Button>
           <Flex>
             {user ? (
+              <User user={user.user} />
+            ) : (
               <Box>
                 <Link href={"/signup"} className="nav-Link">
                   Sign up
                 </Link>
               </Box>
-            ) : (
-              <User />
             )}
           </Flex>
         </Flex>

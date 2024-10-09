@@ -12,7 +12,7 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/features/userSlice";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,15 @@ const Login = () => {
   const { user, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(error);
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+    console.log(user)
+  }, [user, router]);
+
+
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };

@@ -68,9 +68,19 @@ export const signIn = async (req, res) => {
       .cookie("Authorization", "Bearer " + token, {
         expires: new Date(Date.now() + 8 * 3600000),
         httpOnly: true,
+        secure: false,
+        sameSite: "Lax",
       })
       .status(200)
-      .json({ success: true, token: token, message: "Logged in successfully" });
+      .json({
+        success: true,
+        user: {
+          name: existingUser.name,
+          email: existingUser.email,
+        },
+        token: token,
+        message: "Logged in successfully",
+      });
   } catch (error) {
     console.error("SignIn Error: ", error);
     return res.status(500).json({
