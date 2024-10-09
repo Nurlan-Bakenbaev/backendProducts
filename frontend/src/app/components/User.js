@@ -15,7 +15,7 @@ const User = ({ user }) => {
   return (
     <Flex alignItems={"center"} gap={3}>
       <Wrap>
-        <WrapItem>
+        <WrapItem display={{ base: "none", md: "block" }}>
           <Avatar
             title={name}
             size="md"

@@ -44,15 +44,14 @@ const Navbar = () => {
         alignItems={"center"}
         justifyContent={"space-between"}
         flexDir={{ base: "column", sm: "row" }}>
-        <Text
+        <Box
+          display={{ base: "none", md: "block" }}
           bgGradient="linear(to-r, #7921CA, #FF0080)"
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
           fontWeight="extrabold">
-          <Link  href={"/"}>
-            Anzeigen
-          </Link>
-        </Text>
+          <Link href={"/"}>Anzeigen</Link>
+        </Box>
         <Stack display={"flex"} flexDirection={"row"} alignItems={"center"}>
           <Input placeholder="Search..." size="lg" />
           <Button backgroundColor={"#7921CA"}>
@@ -65,6 +64,7 @@ const Navbar = () => {
             <IoMdAdd />
           </Link>
           <Button
+            display={{ base: "none", md: "block" }}
             _hover={{ backgroundColor: "#FF0080" }}
             backgroundColor={"#7921CA"}
             color={"white"}
