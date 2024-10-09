@@ -4,6 +4,8 @@ import {
   Button,
   Container,
   Flex,
+  Input,
+  Stack,
   Text,
   useColorMode,
   useColorModeValue,
@@ -11,6 +13,7 @@ import {
 import { IoMdAdd } from "react-icons/io";
 import { MdLightMode } from "react-icons/md";
 import { MdModeNight } from "react-icons/md";
+import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import User from "./User";
@@ -37,6 +40,7 @@ const Navbar = () => {
         mx="auto"
         maxW={"80%"}
         h={"80px"}
+        gap={3}
         alignItems={"center"}
         justifyContent={"space-between"}
         flexDir={{ base: "column", sm: "row" }}>
@@ -45,9 +49,18 @@ const Navbar = () => {
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
           fontWeight="extrabold">
-          <Link href={"/"}>Anzeigen</Link>
+          <Link  href={"/"}>
+            Anzeigen
+          </Link>
         </Text>
+        <Stack display={"flex"} flexDirection={"row"} alignItems={"center"}>
+          <Input placeholder="Search..." size="lg" />
+          <Button backgroundColor={"#7921CA"}>
+            <CiSearch size={35} />
+          </Button>
+        </Stack>
         <Flex alignItems={"center"} justifyContent={"space-between"} gap={3}>
+          {/* buttons*/}
           <Link href={"/create"} className="nav-Link">
             <IoMdAdd />
           </Link>
