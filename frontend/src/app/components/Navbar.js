@@ -12,23 +12,16 @@ import { IoMdAdd } from "react-icons/io";
 import { MdLightMode } from "react-icons/md";
 import { MdModeNight } from "react-icons/md";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import User from "./User";
+import { useSelector } from "react-redux";
 import cookie from "cookie";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const cookies = cookie.parse(document.cookie);
-    const userEmail = cookies.userEmail || null;
-    const userName = cookies.userName || null;
+  const { user, loading, error } = useSelector((state) => state.user);
 
-    if (userEmail) {
-      setUser({ email: userEmail, name: userName });
-    }
-  }, []);
   return (
     <Container
       maxW={"100%"}
