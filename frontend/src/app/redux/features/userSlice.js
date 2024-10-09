@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// Thunk for Sign Up
 export const postUser = createAsyncThunk(
   "user/postUser",
   async (userData, { rejectWithValue }) => {
@@ -15,6 +16,8 @@ export const postUser = createAsyncThunk(
     }
   }
 );
+
+// Thunk for Login
 export const loginUser = createAsyncThunk(
   "user/login",
   async (userData, { rejectWithValue }) => {
@@ -22,7 +25,7 @@ export const loginUser = createAsyncThunk(
       const res = await axios.post(
         "http://localhost:8000/user/signin",
         userData,
-        { withCredentials: true }
+        { withCredentials: true } // If your API uses cookies
       );
       return res.data;
     } catch (error) {
@@ -38,9 +41,18 @@ const userSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setUserFromStorage: (state, action) => {
+      state.user = action.payload;
+    },
+    logout: (state) => {
+      state.user = null;
+      localStorage.removeItem("user"); 
+    },
+  },
   extraReducers: (builder) => {
     builder
+      // Sign Up Flow
       .addCase(postUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -49,10 +61,11 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.error = null;
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(postUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Failed to sign up";
+        state.error = action.payload;
       });
 
     builder
@@ -64,6 +77,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.error = null;
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -72,4 +86,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { logout, setUserFromStorage } = userSlice.actions;
 export default userSlice.reducer;

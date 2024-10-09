@@ -2,10 +2,13 @@ import { Avatar, Box, Button, Flex, Wrap, WrapItem } from "@chakra-ui/react";
 import React from "react";
 import { IoIosLogOut } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
-
+import { logout } from "../redux/features/userSlice";
+import { useDispatch } from "react-redux";
 const User = ({ user }) => {
   const { name, email, img } = user;
+  const dispatch = useDispatch();
   const handleLogout = () => {
+    dispatch(logout());
     localStorage.removeItem("token");
     window.location.href = "/";
   };

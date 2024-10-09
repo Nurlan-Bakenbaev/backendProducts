@@ -12,15 +12,21 @@ import { IoMdAdd } from "react-icons/io";
 import { MdLightMode } from "react-icons/md";
 import { MdModeNight } from "react-icons/md";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import User from "./User";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setUserFromStorage } from "../redux/features/userSlice";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-
+  const dispatch = useDispatch();
   const { user, loading, error } = useSelector((state) => state.user);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      dispatch(setUserFromStorage(JSON.parse(storedUser)));
+    }
+  }, [dispatch]);
 
   return (
     <Container
