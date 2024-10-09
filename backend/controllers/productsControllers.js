@@ -2,7 +2,8 @@ import Product from "../models/product.model.js";
 
 export const postProduct = async (req, res) => {
   const product = req.body;
-  if (!product.name) {
+
+  if (!product.name || !product.userId) {
     return res
       .status(400)
       .json({ success: false, message: "Please provide all fields" });

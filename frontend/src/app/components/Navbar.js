@@ -15,7 +15,7 @@ import Link from "next/link";
 import React from "react";
 import User from "./User";
 import { useSelector } from "react-redux";
-import cookie from "cookie";
+
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -39,7 +39,7 @@ const Navbar = () => {
           bgClip="text"
           fontSize={{ base: "28px", md: "36px" }}
           fontWeight="extrabold">
-          <Link href={"/"}> ANZEIGEN</Link>
+          <Link href={"/"}>My Blog Post</Link>
         </Text>
         <Flex alignItems={"center"} justifyContent={"space-between"} gap={3}>
           <Link href={"/create"} className="nav-Link">
